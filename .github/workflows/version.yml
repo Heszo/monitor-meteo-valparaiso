@@ -1,0 +1,29 @@
+# Al subir una etiqueta vX.Y.Z crea la versión (release) en GitHub con sus notas de CHANGELOG.md.
+# Antes revisa que la etiqueta coincida con el archivo VERSION.
+name: Publicar versión
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: La etiqueta coincide con VERSION
+        run: test "${GITHUB_REF_NAME#v}" = "$(cat VERSION)"
+
+      - name: Notas de la versión desde CHANGELOG.md
+        run: |
+          awk -v v="[${GITHUB_REF_NAME#v}]" '/^## \[/ { dentro = index($0, v) > 0; next } dentro' CHANGELOG.md > notas.md
+          test -s notas.md
+
+      - name: Crear la versión
+        run: gh release create "$GITHUB_REF_NAME" --title "MetGeo Valparaíso $GITHUB_REF_NAME" --notes-file notas.md
+        env:
+          GH_TOKEN: ${{ github.token }}

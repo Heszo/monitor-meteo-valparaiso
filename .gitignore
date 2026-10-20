@@ -1,0 +1,19 @@
+# Secretos de Streamlit (no se usan hoy, pero nunca deben versionarse)
+.streamlit/secrets.toml
+.env
+
+# Configuración local de herramientas
+.claude/settings.local.json
+.vscode/
+
+# Temporales / SO
+__pycache__/
+*.pyc
+*.swp
+.DS_Store
+
+# originales pesados (6000 px, SVG con metadatos): la app usa las versiones livianas de static/
+images/
+
+# copia local de los pronósticos (python actualiza_pronosticos.py salida)
+salida/

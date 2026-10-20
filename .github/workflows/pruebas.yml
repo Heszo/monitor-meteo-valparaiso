@@ -1,0 +1,24 @@
+# Pruebas de humo (st.testing.AppTest) en cada push y pull request, con la misma
+# versión de Python que usa Streamlit Community Cloud.
+name: Pruebas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - run: pip install -r requirements.txt pytest
+
+      - run: python -m pytest -q
+        working-directory: tests

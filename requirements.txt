@@ -1,0 +1,7 @@
+streamlit>=1.64
+plotly>=6.0
+pandas>=2.0
+numpy>=1.26
+requests>=2.31
+pyarrow>=14
+kaleido>=1.0          # exporta los gráficos a PNG y PDF (usa el Chromium de packages.txt)

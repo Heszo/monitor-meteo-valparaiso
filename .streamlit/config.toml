@@ -1,0 +1,14 @@
+# Sin `base`: la app sigue el modo claro u oscuro del navegador (desde el menú ⋮ → Settings se puede fijar).
+[theme.light]
+primaryColor = "#004090"     # azul del logo MetGeo
+
+[theme.dark]
+primaryColor = "#4E94C3"     # celeste del logo claro: el azul del logo no se lee sobre fondo oscuro
+
+[server]
+headless = true
+enableStaticServing = true   # sirve static/ en app/static/ (foto de portada y logos)
+
+[runner]
+# con ttl de 15 min, lo vencido se sigue sirviendo (mientras se refresca) hasta 45 min
+cacheBackgroundRefreshTTLMultiplier = 4.0
